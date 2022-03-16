@@ -8,6 +8,9 @@ contract Coin {
     address public minter;
     mapping (address => uint) public balances;
 
+    // Events allow clients to react to specific contract changes you declare
+    // Event is an inheritable member of a contract. An event is emitted, it stores the arguments passed in transaction logs
+    // These logs are store on blockain and are accessible using address of the contract til the contract is present on the blockchain.
     event Sent(address from, address to, uint amount);
 
     // constructor only runs when we deploy contract
@@ -37,6 +40,9 @@ contract Coin {
         
         balances[msg.sender] -= amount;
         balances[receiver] += amount;
+
+        // emit send event
+        emit Sent(msg.sender, receiver, amount);
     }
 
 }
